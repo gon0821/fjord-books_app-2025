@@ -28,4 +28,27 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  title: Title
+  memo: Memo
+  author: Author
+  picture: Picture
+  index: Back to list page
+  show: Go to the details page
+  new: Go to the registration page
+  edit: Edit
+  create: Create
+  destroy: Destroy
+  books:
+    index:
+      title: Books
+    show:
+    new:
+      title: New book
+    edit:
+      title: Editing book
+    create:
+      success: Book was successfully created.
+    update:
+      success: Book was successfully updated.
+    destroy:
+      success: Book was successfully destroyed.
