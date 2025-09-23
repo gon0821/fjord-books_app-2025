@@ -17,7 +17,6 @@ ja:
   books:
     index:
       title: 書籍一覧
-    show:
     new:
       title: 書籍登録
     edit:
