@@ -28,10 +28,6 @@
 #       enabled: "ON"
 
 en:
-  title: Title
-  memo: Memo
-  author: Author
-  picture: Picture
   index: Back to list page
   show: Go to the details page
   new: Go to the registration page

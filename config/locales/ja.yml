@@ -1,8 +1,13 @@
 ja:
-  title: タイトル
-  memo: メモ
-  author: 著者
-  picture: 画像
+  activerecord:
+    models:
+      book: 書籍
+    attributes:
+      book:
+        title: タイトル
+        memo: メモ
+        author: 著者
+        picture: 画像
   index: 一覧ページへ
   show: 詳細ページへ
   new: 登録ページへ
