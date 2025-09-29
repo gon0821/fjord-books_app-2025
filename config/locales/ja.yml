@@ -1,4 +1,8 @@
 ja:
+  helpers:
+    submit:
+      create: 登録する
+      update: 更新する
   activerecord:
     models:
       book: 書籍
@@ -8,19 +12,22 @@ ja:
         memo: メモ
         author: 著者
         picture: 画像
-  index: 一覧ページへ
-  show: 詳細ページへ
-  new: 登録ページへ
-  edit: 編集する
-  create: 登録する
-  destroy: 削除する
   books:
     index:
       title: 書籍一覧
+      show: 詳細ページへ
+      new: 登録ページへ
+    show:
+      index: 戻る
+      edit: 編集する
+      destroy: 削除する
     new:
       title: 書籍登録
+      index: 戻る
     edit:
       title: 書籍編集
+      index: 一覧ページへ
+      show: 詳細ページへ
     create:
       success: 書籍が正常に作成されました。
     update:
