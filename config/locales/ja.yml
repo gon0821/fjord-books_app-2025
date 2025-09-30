@@ -1,0 +1,36 @@
+ja:
+  helpers:
+    submit:
+      create: 登録する
+      update: 更新する
+  activerecord:
+    models:
+      book: 書籍
+    attributes:
+      book:
+        title: タイトル
+        memo: メモ
+        author: 著者
+        picture: 画像
+  books:
+    index:
+      title: 書籍一覧
+      show: 詳細ページへ
+      new: 登録ページへ
+    show:
+      index: 戻る
+      edit: 編集する
+      destroy: 削除する
+    new:
+      title: 書籍登録
+      index: 戻る
+    edit:
+      title: 書籍編集
+      index: 一覧ページへ
+      show: 詳細ページへ
+    create:
+      success: 書籍が正常に作成されました。
+    update:
+      success: 書籍の更新が正常に完了しました。
+    destroy:
+      success: 書籍の削除が正常に完了しました。
