@@ -20,4 +20,5 @@
 
 <nav class="page-nav">
   <%= link_to t('views.common.new', name: Book.model_name.human.downcase), new_book_path %>
+  <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %>
 </nav>
