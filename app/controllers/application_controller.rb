@@ -6,4 +6,12 @@ class ApplicationController < ActionController::Base
   before_action do
     I18n.locale = :ja
   end
+
+  before_action :configure_permitted_parameters, if: :devise_controller?
+
+  protected
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:account_update, keys: [:post_code, :address, :description])
+  end
 end
