@@ -1,2 +1,30 @@
-<h1>Users#show</h1>
-<p>Find me in app/views/users/show.html.erb</p>
+<p style="color: green"><%= notice %></p>
+
+<div class="show-item">
+  <div>
+    <p>
+      <strong><%= User.human_attribute_name(:email) %>:</strong>
+      <%= @user.email %>
+    </p>
+
+    <p>
+      <strong><%= User.human_attribute_name(:post_code) %>:</strong>
+      <%= @user.post_code %>
+    </p>
+
+    <p>
+      <strong><%= User.human_attribute_name(:address) %>:</strong>
+      <%= @user.address %>
+    </p>
+
+    <p>
+      <strong><%= User.human_attribute_name(:description) %>:</strong>
+      <%= @user.description %>
+    </p>
+  </div>
+</div>
+
+<nav class="page-nav">
+  <%= link_to t('views.common.back', name: i18n_pluralize(User.model_name.human.downcase)), users_path %>
+
+</nav>

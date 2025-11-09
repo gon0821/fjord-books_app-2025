@@ -4,5 +4,6 @@ class UsersController < ApplicationController
   end
 
   def show
+    @user = User.find(params.expect(:id))
   end
 end
