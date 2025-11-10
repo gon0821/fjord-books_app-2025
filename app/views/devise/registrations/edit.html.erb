@@ -1,4 +1,4 @@
-<h2>アカウント編集</h2>
+<h2><%= t('devise.registrations.edit.account') %></h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
@@ -13,12 +13,11 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :password %> <i>(変更したくない場合は空欄のままにしてください)</i><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.label :password %> <i>(<%= t('devise.registrations.edit.leave_blank_if_you_don_t_want_to_change_it') %>)</i>
     <% if @minimum_password_length %>
-      <br />
-      <em><%= @minimum_password_length %>文字が最小です</em>
+      <em><%= t('devise.shared.minimum_password_length.other', count: @minimum_password_length) %></em>
     <% end %>
+    <%= f.password_field :password, autocomplete: "new-password" %>
   </div>
 
   <div class="field">
@@ -42,17 +41,17 @@
   </div>
 
   <div class="field">
-    <%= f.label :current_password %> <i>(変更を確認するため、現在のパスワードが必要です)</i><br />
+    <%= f.label :current_password %> <i>(<%= t('devise.registrations.edit.we_need_your_current_password_to_confirm_your_changes') %>)</i><br />
     <%= f.password_field :current_password, autocomplete: "current-password" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "更新" %>
+    <%= f.submit t('devise.registrations.edit.update') %>
   </div>
 <% end %>
 
-<h3>アカウント解約</h3>
+<h3><%= t('devise.registrations.edit.cancel_my_account') %></h3>
 
-<div><%= button_to "アカウントを解約する", registration_path(resource_name), data: { confirm: "本当に解約しますか?", turbo_confirm: "本当に解約しますか?" }, method: :delete %></div>
+<div><%= button_to t('devise.registrations.edit.cancel_my_account'), registration_path(resource_name), data: { confirm: t('devise.registrations.edit.are_you_sure'), turbo_confirm: t('devise.registrations.edit.are_you_sure') }, method: :delete %></div>
 
-<%= link_to "戻る", :back %>
+<%= link_to t('devise.shared.links.back'), :back %>

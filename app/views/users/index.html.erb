@@ -17,7 +17,7 @@
 <%= paginate @users %>
 
 <nav class="page-nav">
-  <%= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete } %>
-  <%= link_to 'アカウント編集', edit_user_registration_path %>
+  <%= link_to t('devise.sessions.new.sign_out'), destroy_user_session_path, data: { turbo_method: :delete } %>
+  <%= link_to t('devise.registrations.edit.account'), edit_user_registration_path %>
   <%= link_to t('views.common.title_index', name: Book.model_name.human.downcase), root_path %>
 </nav>
