@@ -29,8 +29,6 @@
     <strong><%= User.human_attribute_name(:icon) %>:</strong>
     <% if user.icon.attached? %>
       <%= image_tag user.icon %>
-    <% else %>
-      <%= image_tag 'no-image.png' %>
     <% end %>
   </p>
 </div>
