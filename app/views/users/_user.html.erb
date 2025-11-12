@@ -27,8 +27,6 @@
 
   <p>
     <strong><%= User.human_attribute_name(:icon) %>:</strong>
-    <% if user.icon.attached? %>
-      <%= image_tag user.icon %>
-    <% end %>
+    <%= image_tag user.icon.variant(:thumb) if user.icon.attached? %>
   </p>
 </div>
