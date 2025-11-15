@@ -9,9 +9,11 @@ class User < ApplicationRecord
   validate :allowed_image_formats
 
   private
+
   def allowed_image_formats
-    if icon.attached? && !icon.content_type.match?(/image\/(jpeg|png|gif)/)
-      errors.add(:icon, 'が正しい画像形式ではありません')
-    end
+    return unless icon.attached?
+    return if icon.content_type.match?(%r{image/(jpeg|png|gif)})
+
+    errors.add(:icon, 'が正しい画像形式ではありません')
   end
 end
