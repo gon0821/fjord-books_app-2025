@@ -14,6 +14,6 @@ class User < ApplicationRecord
     return unless icon.attached?
     return if icon.content_type.match?(%r{image/(jpeg|png|gif)})
 
-    errors.add(:icon, 'が正しい画像形式ではありません')
+    errors.add(:icon, 'が正しい画像形式ではありません。jpg, png, gif形式のいずれかでお願いします。')
   end
 end
