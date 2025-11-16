@@ -61,6 +61,7 @@ group :development do
   gem 'i18n_generators'
 
   # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem 'letter_opener_web', '~> 3.0'
   gem 'web-console'
 end
 
@@ -72,3 +73,6 @@ end
 
 gem 'carrierwave'
 gem 'kaminari'
+
+gem 'devise', '~> 4.9'
+gem 'devise-i18n'
