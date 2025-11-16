@@ -32,7 +32,7 @@ class ReportsController < ApplicationController
 
   def destroy
     @report.destroy!
-    redirect_to reports_path, status: :see_other, t('controllers.common.notice_destroy', name: Report.model_name.human)
+    redirect_to reports_path, status: :see_other, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
 
   private
