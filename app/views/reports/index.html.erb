@@ -12,7 +12,7 @@
   <% @reports.each do |report| %>
     <div>
       <p><%= report.title %></p>
-      <p><%#= report. %></p>
+      <p><%= current_user_name(report.user) %></p>
       <p><%= report.target_date %></p>
     </div>
   <% end %>

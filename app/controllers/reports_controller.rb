@@ -8,13 +8,13 @@ class ReportsController < ApplicationController
   def show; end
 
   def new
-    @report = Report.new
+    @report = current_user.reports.new
   end
 
   def edit; end
 
   def create
-    @report = Report.new(report_params)
+    @report = current_user.reports.new(report_params)
     if @report.save
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
