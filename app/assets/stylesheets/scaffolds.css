@@ -319,3 +319,38 @@ form input[type="submit"] {
 form input[type="submit"]:hover {
   background-color: var(--global-primary-c-hover);
 }
+
+/****************
+Report Index
+****************/
+.card-list-items {
+  margin-top: 1rem;
+}
+
+.card-list-item {
+  padding: 1rem;
+  border: 1px solid #005580;
+}
+
+.card-list-item:not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+.card-list-item-title {
+  font-size: 1.25rem;
+  margin: 0.5rem;
+}
+
+.card-list-item-title a {
+  color: #01289d;
+}
+
+.card-list-item-meta {
+  display: flex;
+  gap: 2rem;
+  padding-left: 1rem;
+}
+
+.card-list-item-meta a {
+  text-decoration: none;
+}
