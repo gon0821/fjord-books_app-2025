@@ -1,9 +1,10 @@
-<%= form_with model: @report do |form| %>
-  <% if @report.errors.any? %>
+<%= form_with(model: report) do |form| %>
+  <% if report.errors.any? %>
     <div style="color: red">
-      <h2><%= t('views.common.validation_error', errors: i18n_error_count(@report.errors.count), name: Report.model_name.human.downcase) %>:</h2>
+      <h2><%= t('views.common.validation_error', errors: i18n_error_count(report.errors.count), name: Report.model_name.human.downcase) %>:</h2>
+
       <ul>
-        <% @report.errors.each do |error| %>
+        <% report.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -14,14 +15,17 @@
     <%= form.label :title, style: "display: block" %>
     <%= form.text_field :title %>
   </div>
+
   <div>
     <%= form.label :target_date, style: "display: block" %>
     <%= form.date_field :target_date %>
   </div>
+
   <div>
     <%= form.label :content, style: "display: block" %>
     <%= form.textarea :content %>
   </div>
+
   <div>
     <%= form.submit %>
   </div>
