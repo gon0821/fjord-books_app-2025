@@ -26,4 +26,15 @@
 </nav>
 
 <h2><%= Comment.model_name.human %></h2>
-<%= render 'comments/form', commentable_type: @report, comment: @comment %>
+
+<div>
+  <% @comments.each do |comment| %>
+    <div class="comment-item">
+      <p><%= current_user_name(User.find(comment.user_id)) %></p>
+      <p><%= comment.updated_at %></p>
+      <p><%= comment.content %></p>
+    </div>
+  <% end %>
+</div>
+
+<%= render 'comments/form', commentable: @report, comment: @comment %>

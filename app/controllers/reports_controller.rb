@@ -7,6 +7,7 @@ class ReportsController < ApplicationController
 
   def show
     @comment = current_user.comments.new
+    @comments = Comment.where(commentable_type: 'Report', commentable_id: params[:id])
   end
 
   def new
