@@ -5,7 +5,9 @@ class ReportsController < ApplicationController
     @reports = Report.all
   end
 
-  def show; end
+  def show
+    @comment = current_user.comments.new
+  end
 
   def new
     @report = current_user.reports.new
