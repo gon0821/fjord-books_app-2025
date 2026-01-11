@@ -31,7 +31,7 @@
   <% @comments.each do |comment| %>
     <div class="comment-item">
       <p><%= current_user_name(User.find(comment.user_id)) %></p>
-      <p><%= comment.updated_at %></p>
+      <p><%= l comment.updated_at %></p>
       <p><%= comment.content %></p>
     </div>
   <% end %>
