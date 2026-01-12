@@ -24,3 +24,8 @@
 .comment-item p:last-child {
   padding-bottom: 0;
 }
+
+.comment-footer {
+  padding-top: 12px;
+  border-top: solid 1px rgb(236, 236, 236);
+}

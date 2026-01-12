@@ -22,6 +22,10 @@ class CommentsController < ApplicationController
   end
 
   def destroy
+    @comment = Comment.find(params[:id])
+    return redirect_to @comment.commentable, alert: '自分以外の日報は削除できません' unless @comment.user == current_user
+    @comment.destroy
+    redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private

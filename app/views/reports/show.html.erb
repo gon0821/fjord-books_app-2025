@@ -33,6 +33,13 @@
       <p><%= current_user_name(User.find(comment.user_id)) %></p>
       <p><%= l comment.updated_at %></p>
       <p><%= comment.content %></p>
+      <div class="comment-footer">
+        <% if comment.user == current_user %>
+          <div>
+            <%= button_to '削除する', report_comment_path(@report, comment), method: :delete %>
+          </div>
+        <% end %>
+      </div>
     </div>
   <% end %>
 </div>
