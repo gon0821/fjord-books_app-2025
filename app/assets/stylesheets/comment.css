@@ -28,4 +28,6 @@
 .comment-footer {
   padding-top: 12px;
   border-top: solid 1px rgb(236, 236, 236);
+  display: flex;
+  gap: 1rem;
 }

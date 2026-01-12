@@ -22,6 +22,9 @@
       <div class="comment-footer">
         <% if comment.user == current_user %>
           <div>
+            <%= link_to '編集する', edit_book_comment_path(@book, comment) %>
+          </div>
+          <div>
             <%= button_to '削除する', book_comment_path(@book, comment), method: :delete %>
           </div>
         <% end %>
