@@ -17,7 +17,7 @@
   <% @comments.each do |comment| %>
     <div class="comment-item">
       <p><%= current_user_name(User.find(comment.user_id)) %></p>
-      <p><%= l comment.updated_at %></p>
+      <p><%= l comment.created_at %></p>
       <p><%= comment.content %></p>
       <div class="comment-footer">
         <% if comment.user == current_user %>

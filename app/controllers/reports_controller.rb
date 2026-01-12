@@ -2,12 +2,12 @@ class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
 
   def index
-    @reports = Report.all
+    @reports = Report.all.order(target_date: :desc)
   end
 
   def show
     @comment = current_user.comments.new
-    @comments = Comment.where(commentable_type: 'Report', commentable_id: params[:id])
+    @comments = Comment.where(commentable_type: 'Report', commentable_id: params[:id]).order(:created_at)
   end
 
   def new
