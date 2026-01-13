@@ -9,19 +9,5 @@
 </nav>
 
 <div class="card-list-items">
-  <% @reports.each do |report| %>
-    <div class="card-list-item">
-      <h2 class="card-list-item-title">
-        <%= link_to report.title, report %>
-      </h2>
-      <div class="card-list-item-meta">
-        <div class="card-list-item-meta__item">
-          <%= link_to current_user_name(report.user), report.user %>
-        </div>
-        <div class="card-list-item-meta__item">
-          <%= report.target_date %>の日報
-        </div>
-      </div>
-    </div>
-  <% end %>
+  <%= render @reports %>
 </div>
