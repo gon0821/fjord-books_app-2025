@@ -3,7 +3,7 @@
   max-width: 640px;
   display: block;
   border: solid 1px rgb(175, 175, 175);
-  padding: 24px;
+  padding: 16px;
   border-radius: 4px;
   font-size: 14px;
   line-height: 1.8;
@@ -12,17 +12,16 @@
 
 .comment-item p {
   margin: 0;
-  padding: 1em 0;
+  padding: 1.5rem 0;
   border-top: solid 1px rgb(236, 236, 236);
 }
 
-.comment-item p:first-child {
-  padding-top: 0;
-  border-top: none;
-}
-
-.comment-item p:last-child {
-  padding-bottom: 0;
+.comment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 6px;
+  font-size: 12px;
 }
 
 .comment-footer {
@@ -30,4 +29,5 @@
   border-top: solid 1px rgb(236, 236, 236);
   display: flex;
   gap: 1rem;
+  justify-content: center;
 }
