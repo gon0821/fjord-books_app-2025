@@ -1,36 +1,42 @@
-<h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
+<div class="container">
+  <div class="main-content">
+    <h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
 
-<div class="show-item">
-  <%= render @book %>
-</div>
-
-<nav class="page-nav">
-  <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
-
-  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
-</nav>
-
-<h2><%= Comment.model_name.human %></h2>
-
-<div>
-  <% @comments.each do |comment| %>
-    <div class="comment-item">
-      <p><%= current_user_name(User.find(comment.user_id)) %></p>
-      <p><%= l comment.created_at %></p>
-      <p><%= comment.content %></p>
-      <div class="comment-footer">
-        <% if comment.user == current_user %>
-          <div>
-            <%= link_to '編集する', edit_book_comment_path(@book, comment) %>
-          </div>
-          <div>
-            <%= button_to '削除する', book_comment_path(@book, comment), method: :delete %>
-          </div>
-        <% end %>
-      </div>
+    <div class="show-item">
+      <%= render @book %>
     </div>
-  <% end %>
-</div>
 
-<%= render 'comments/form', commentable: @book, comment: @comment %>
+    <nav class="page-nav">
+      <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
+      <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
+
+      <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
+    </nav>
+  </div>
+
+  <div class="sidebar">
+    <h2><%= Comment.model_name.human %></h2>
+
+    <div>
+      <% @comments.each do |comment| %>
+        <div class="comment-item">
+          <p><%= current_user_name(User.find(comment.user_id)) %></p>
+          <p><%= l comment.created_at %></p>
+          <p><%= comment.content %></p>
+          <div class="comment-footer">
+            <% if comment.user == current_user %>
+              <div>
+                <%= link_to '編集する', edit_book_comment_path(@book, comment) %>
+              </div>
+              <div>
+                <%= button_to '削除する', book_comment_path(@book, comment), method: :delete %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render 'comments/form', commentable: @book, comment: @comment %>
+  </div>
+</div>

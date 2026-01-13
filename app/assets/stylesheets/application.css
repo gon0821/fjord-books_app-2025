@@ -8,3 +8,17 @@
  *
  * Consider organizing styles into separate files for maintainability.
  */
+
+.container {
+  display: flex;
+  gap: 1rem;
+  justify-content: start;
+}
+
+.main-content {
+  width: 50%;
+}
+
+.sidebar {
+  width: 30%;
+}

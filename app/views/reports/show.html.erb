@@ -1,50 +1,56 @@
-<h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
+<div class='container'>
+  <div class="main-content">
+    <h1><%= t('views.common.title_show', name: Report.model_name.human) %></h1>
 
-<div class="show-item">
-  <p>
-    <strong><%= Report.human_attribute_name(:title) %></strong>
-    <%= @report.title %>
-  </p>
-  <p>
-    <strong><%= Report.human_attribute_name(:target_date) %></strong>
-    <%= @report.target_date %>
-  </p>
-  <p>
-    <strong><%= Report.human_attribute_name(:content) %></strong>
-    <%= @report.content %>
-  </p>
-</div>
-
-<nav class="page-nav">
-  <% if @report.user == current_user %>
-    <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
-    <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
-    <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete %>
-  <% else %>
-    <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
-  <% end %>
-</nav>
-
-<h2><%= Comment.model_name.human %></h2>
-
-<div>
-  <% @comments.each do |comment| %>
-    <div class="comment-item">
-      <p><%= current_user_name(User.find(comment.user_id)) %></p>
-      <p><%= l comment.created_at %></p>
-      <p><%= comment.content %></p>
-      <div class="comment-footer">
-        <% if comment.user == current_user %>
-          <div>
-            <%= link_to '編集する', edit_report_comment_path(@report, comment) %>
-          </div>
-          <div>
-            <%= button_to '削除する', report_comment_path(@report, comment), method: :delete %>
-          </div>
-        <% end %>
-      </div>
+    <div class="show-item">
+      <p>
+        <strong><%= Report.human_attribute_name(:title) %></strong>
+        <%= @report.title %>
+      </p>
+      <p>
+        <strong><%= Report.human_attribute_name(:target_date) %></strong>
+        <%= @report.target_date %>
+      </p>
+      <p>
+        <strong><%= Report.human_attribute_name(:content) %></strong>
+        <%= @report.content %>
+      </p>
     </div>
-  <% end %>
-</div>
 
-<%= render 'comments/form', commentable: @report, comment: @comment %>
+    <nav class="page-nav">
+      <% if @report.user == current_user %>
+        <%= link_to t('views.common.edit', name: Report.model_name.human.downcase), edit_report_path(@report) %> |
+        <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
+        <%= button_to t('views.common.destroy', name: Report.model_name.human.downcase), @report, method: :delete %>
+      <% else %>
+        <%= link_to t('views.common.back', name: i18n_pluralize(Report.model_name.human.downcase)), reports_path %>
+      <% end %>
+    </nav>
+  </div>
+
+  <div class="sidebar">
+    <h2><%= Comment.model_name.human %></h2>
+
+    <div>
+      <% @comments.each do |comment| %>
+        <div class="comment-item">
+          <p><%= current_user_name(User.find(comment.user_id)) %></p>
+          <p><%= l comment.created_at %></p>
+          <p><%= comment.content %></p>
+          <div class="comment-footer">
+            <% if comment.user == current_user %>
+              <div>
+                <%= link_to '編集する', edit_report_comment_path(@report, comment) %>
+              </div>
+              <div>
+                <%= button_to '削除する', report_comment_path(@report, comment), method: :delete %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render 'comments/form', commentable: @report, comment: @comment %>
+  </div>
+</div>
