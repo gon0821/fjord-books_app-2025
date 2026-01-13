@@ -32,23 +32,7 @@
     <h2><%= Comment.model_name.human %></h2>
 
     <div>
-      <% @comments.each do |comment| %>
-        <div class="comment-item">
-          <p><%= current_user_name(User.find(comment.user_id)) %></p>
-          <p><%= l comment.created_at %></p>
-          <p><%= comment.content %></p>
-          <div class="comment-footer">
-            <% if comment.user == current_user %>
-              <div>
-                <%= link_to '編集する', edit_report_comment_path(@report, comment) %>
-              </div>
-              <div>
-                <%= button_to '削除する', report_comment_path(@report, comment), method: :delete %>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+      <%= render @comments, commentable: @report %>
     </div>
 
     <%= render 'comments/form', commentable: @report, comment: @comment %>
