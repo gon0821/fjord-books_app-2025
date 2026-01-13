@@ -18,7 +18,15 @@
     <h2><%= Comment.model_name.human %></h2>
 
     <div>
-      <%= render @comments, commentable: @book %>
+      <% if @comments.blank? %>
+        <%= image_tag 'no-comment.png', class: 'comment-image', alt: 'ディスカッションイメージ' %>
+        <p class='comment-message'>
+          <b>コメントはまだありません</b><br>
+          コメントを追加して会話を始めましょう
+        </p>
+      <% else %>
+        <%= render @comments, commentable: @book %>
+      <% end %>
     </div>
 
     <%= render 'comments/form', commentable: @book, comment: @comment %>

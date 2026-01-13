@@ -31,3 +31,13 @@
   gap: 1rem;
   justify-content: center;
 }
+
+.comment-image {
+  width: 60%;
+  display: block;
+  margin-inline: auto;
+}
+
+.comment-message {
+  text-align: center;
+}
