@@ -203,6 +203,14 @@ ja:
       previous: '‹ 前'
       next: '次 ›'
       truncate: '…'
+    reports:
+      date: "%{date}の日報"
+    comments:
+      create: コメントする
+      edit: 編集する
+      destroy: 削除する
+      empty_message: コメントはまだありません
+      empty_description: コメントを追加して会話を始めましょう
   controllers:
     common:
       notice_create: "%{name}が作成されました。"

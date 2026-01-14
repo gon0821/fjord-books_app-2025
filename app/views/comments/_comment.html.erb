@@ -7,10 +7,10 @@
   <div class="comment-footer">
     <% if comment.user == current_user %>
       <div>
-        <%= link_to '編集する', edit_report_comment_path(commentable, comment) %>
+        <%= link_to t('views.comments.edit'), edit_report_comment_path(commentable, comment) %>
       </div>
       <div>
-        <%= button_to '削除する', report_comment_path(commentable, comment), method: :delete %>
+        <%= button_to t('views.comments.destroy'), report_comment_path(commentable, comment), method: :delete %>
       </div>
     <% end %>
   </div>

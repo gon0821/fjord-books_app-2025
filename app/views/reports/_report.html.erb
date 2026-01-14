@@ -7,7 +7,7 @@
       <%= link_to current_user_name(report.user), report.user %>
     </div>
     <div class="card-list-item-meta__item">
-      <%= report.target_date %>の日報
+      <%= t('views.reports.date', date: l(report.target_date, format: :long)) %>
     </div>
   </div>
 </div>

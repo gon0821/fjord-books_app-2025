@@ -33,10 +33,10 @@
 
     <div>
       <% if @comments.blank? %>
-        <%= image_tag 'no-comment.png', class: 'comment-image', alt: 'ディスカッションイメージ' %>
+        <%= image_tag 'no-comment.png', class: 'comment-image', alt: 'Discussion Image' %>
         <p class='comment-message'>
-          <b>コメントはまだありません</b><br>
-          コメントを追加して会話を始めましょう
+          <b><%= t('views.comments.empty_message') %></b><br>
+          <%= t('views.comments.empty_description') %>
         </p>
       <% else %>
         <%= render @comments, commentable: @report %>
