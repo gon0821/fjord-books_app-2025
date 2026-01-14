@@ -1,6 +1,6 @@
 <div class="comment-item">
   <div class="comment-header">
-    <div><%= current_user_name(User.find(comment.user_id)) %></div>
+    <div><%= current_user_name(comment.user) %></div>
     <div><%= l comment.created_at %></div>
   </div>
   <p><%= comment.content %></p>
