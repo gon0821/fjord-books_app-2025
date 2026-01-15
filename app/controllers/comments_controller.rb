@@ -10,18 +10,17 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
 
-    case @comment.commentable_type
-    when 'Report'
-      @report = Report.find(comment_params[:commentable_id])
-      @comments = @report.comments
-    when 'Book'
-      @book = Book.find(comment_params[:commentable_id])
-      @comments = @book.comments
-    end
-
     if @comment.save
       redirect_to @comment.commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
     else
+      case @comment.commentable_type
+      when 'Report'
+        @report = Report.find(comment_params[:commentable_id])
+        @comments = @report.comments
+      when 'Book'
+        @book = Book.find(comment_params[:commentable_id])
+        @comments = @book.comments
+      end
       render "#{comment_params[:commentable_type].downcase.pluralize}/show", status: :unprocessable_entity
     end
   end
