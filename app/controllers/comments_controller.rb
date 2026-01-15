@@ -1,18 +1,20 @@
+# frozen_string_literal: true
+
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
 
   def edit
-    return redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
+    redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
   end
 
   def create
     @comment = Comment.new(comment_params)
 
     case @comment.commentable_type
-    when "Report"
+    when 'Report'
       @report = Report.find(comment_params[:commentable_id])
       @comments = @report.comments
-    when "Book"
+    when 'Book'
       @book = Book.find(comment_params[:commentable_id])
       @comments = @book.comments
     end
@@ -36,6 +38,7 @@ class CommentsController < ApplicationController
 
   def destroy
     return redirect_to @comment.commentable, alert: t('controllers.common.alert_destroy', name: Comment.model_name.human) unless @comment.user == current_user
+
     @comment.destroy
     redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
@@ -47,6 +50,6 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.expect(comment: [:content, :commentable_id, :commentable_type]).merge(user_id: current_user.id)
+    params.expect(comment: %i[content commentable_id commentable_type]).merge(user_id: current_user.id)
   end
 end

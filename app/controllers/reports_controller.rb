@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
 
@@ -15,7 +17,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    return redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
+    redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
   end
 
   def create
@@ -29,6 +31,7 @@ class ReportsController < ApplicationController
 
   def update
     return redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
+
     if @report.update(report_params)
       redirect_to @report, status: :see_other, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
@@ -38,6 +41,7 @@ class ReportsController < ApplicationController
 
   def destroy
     return redirect_to reports_path, alert: t('controllers.common.alert_destroy', name: Report.model_name.human) unless @report.user == current_user
+
     @report.destroy!
     redirect_to reports_path, status: :see_other, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
