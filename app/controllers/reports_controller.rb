@@ -15,7 +15,7 @@ class ReportsController < ApplicationController
   end
 
   def edit
-    return redirect_to reports_path, alert: '自分以外の日報は編集できません' unless @report.user == current_user
+    return redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
   end
 
   def create
@@ -28,7 +28,7 @@ class ReportsController < ApplicationController
   end
 
   def update
-    return redirect_to reports_path, alert: '自分以外の日報は編集できません' unless @report.user == current_user
+    return redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
     if @report.update(report_params)
       redirect_to @report, status: :see_other, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
@@ -37,7 +37,7 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    return redirect_to reports_path, alert: '自分以外の日報は削除できません' unless @report.user == current_user
+    return redirect_to reports_path, alert: t('controllers.common.alert_destroy', name: Report.model_name.human) unless @report.user == current_user
     @report.destroy!
     redirect_to reports_path, status: :see_other, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end

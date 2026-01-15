@@ -1,7 +1,7 @@
 class CommentsController < ApplicationController
   def edit
     @comment = Comment.find(params[:id])
-    return redirect_to @comment.commentable, alert: '自分以外のコメントは編集できません' unless @comment.user == current_user
+    return redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
   end
 
   def create
@@ -25,7 +25,7 @@ class CommentsController < ApplicationController
 
   def update
     @comment = Comment.find(params[:id])
-    return redirect_to @comment.commentable, alert: '自分以外のコメントは編集できません' unless @comment.user == current_user
+    return redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
 
     if @comment.update(comment_params)
       redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
@@ -36,7 +36,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = Comment.find(params[:id])
-    return redirect_to @comment.commentable, alert: '自分以外のコメントは削除できません' unless @comment.user == current_user
+    return redirect_to @comment.commentable, alert: t('controllers.common.alert_destroy', name: Comment.model_name.human) unless @comment.user == current_user
     @comment.destroy
     redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
