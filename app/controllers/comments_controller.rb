@@ -1,6 +1,7 @@
 class CommentsController < ApplicationController
+  before_action :set_comment, only: %i[edit update destroy]
+
   def edit
-    @comment = Comment.find(params[:id])
     return redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
   end
 
@@ -24,7 +25,6 @@ class CommentsController < ApplicationController
   end
 
   def update
-    @comment = Comment.find(params[:id])
     return redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
 
     if @comment.update(comment_params)
@@ -35,13 +35,16 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment = Comment.find(params[:id])
     return redirect_to @comment.commentable, alert: t('controllers.common.alert_destroy', name: Comment.model_name.human) unless @comment.user == current_user
     @comment.destroy
     redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
 
   private
+
+  def set_comment
+    @comment = Comment.find(params.expect(:id))
+  end
 
   def comment_params
     params.expect(comment: [:content, :commentable_id, :commentable_type]).merge(user_id: current_user.id)
