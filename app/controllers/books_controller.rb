@@ -11,7 +11,7 @@ class BooksController < ApplicationController
   # GET /books/1 or /books/1.json
   def show
     @comment = current_user.comments.new
-    @comments = Comment.includes(:user).where(commentable_type: 'Book', commentable_id: params[:id]).order(:created_at)
+    @comments = @book.comments
   end
 
   # GET /books/new

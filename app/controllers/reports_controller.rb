@@ -9,7 +9,7 @@ class ReportsController < ApplicationController
 
   def show
     @comment = current_user.comments.new
-    @comments = Comment.includes(:user).where(commentable_type: 'Report', commentable_id: params[:id]).order(:created_at)
+    @comments = @report.comments
   end
 
   def new
