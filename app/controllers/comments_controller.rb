@@ -2,10 +2,9 @@
 
 class CommentsController < ApplicationController
   before_action :set_comment, only: %i[edit update destroy]
+  before_action :redirect_unless_owner, only: %i[edit update destroy]
 
-  def edit
-    redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
-  end
+  def edit; end
 
   def create
     @comment = Comment.new(comment_params)
@@ -26,8 +25,6 @@ class CommentsController < ApplicationController
   end
 
   def update
-    return redirect_to @comment.commentable, alert: t('controllers.common.alert_update', name: Comment.model_name.human) unless @comment.user == current_user
-
     if @comment.update(comment_params)
       redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
     else
@@ -36,8 +33,6 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    return redirect_to @comment.commentable, alert: t('controllers.common.alert_destroy', name: Comment.model_name.human) unless @comment.user == current_user
-
     @comment.destroy
     redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_destroy', name: Comment.model_name.human)
   end
@@ -50,5 +45,9 @@ class CommentsController < ApplicationController
 
   def comment_params
     params.expect(comment: %i[content commentable_id commentable_type]).merge(user_id: current_user.id)
+  end
+
+  def redirect_unless_owner
+    redirect_to @comment.commentable, alert: t('controllers.common.alert_permission', name: Comment.model_name.human) unless @comment.user == current_user
   end
 end

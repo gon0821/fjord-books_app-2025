@@ -216,8 +216,7 @@ ja:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
-      alert_update: "自分以外の%{name}は編集できません"
-      alert_destroy: "自分以外の%{name}は削除できません"
+      alert_permission: "本人以外の%{name}でこの操作は許可されていません"
   layouts:
     application:
       menu: メニュー

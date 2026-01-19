@@ -2,6 +2,7 @@
 
 class ReportsController < ApplicationController
   before_action :set_report, only: %i[show edit update destroy]
+  before_action :redirect_unless_owner, only: %i[edit update destroy]
 
   def index
     @reports = Report.includes(:user).all.order(target_date: :desc)
@@ -16,9 +17,7 @@ class ReportsController < ApplicationController
     @report = current_user.reports.new
   end
 
-  def edit
-    redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
-  end
+  def edit; end
 
   def create
     @report = current_user.reports.new(report_params)
@@ -30,8 +29,6 @@ class ReportsController < ApplicationController
   end
 
   def update
-    return redirect_to reports_path, alert: t('controllers.common.alert_update', name: Report.model_name.human) unless @report.user == current_user
-
     if @report.update(report_params)
       redirect_to @report, status: :see_other, notice: t('controllers.common.notice_update', name: Report.model_name.human)
     else
@@ -40,8 +37,6 @@ class ReportsController < ApplicationController
   end
 
   def destroy
-    return redirect_to reports_path, alert: t('controllers.common.alert_destroy', name: Report.model_name.human) unless @report.user == current_user
-
     @report.destroy!
     redirect_to reports_path, status: :see_other, notice: t('controllers.common.notice_destroy', name: Report.model_name.human)
   end
@@ -54,5 +49,9 @@ class ReportsController < ApplicationController
 
   def report_params
     params.expect(report: %i[title content target_date])
+  end
+
+  def redirect_unless_owner
+    redirect_to reports_path, alert: t('controllers.common.alert_permission', name: Report.model_name.human) unless @report.user == current_user
   end
 end
