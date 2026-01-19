@@ -9,7 +9,7 @@
       </p>
       <p>
         <strong><%= Report.human_attribute_name(:target_date) %></strong>
-        <%= @report.target_date %>
+        <%= l @report.target_date, format: :long %>
       </p>
       <p>
         <strong><%= Report.human_attribute_name(:content) %></strong>
