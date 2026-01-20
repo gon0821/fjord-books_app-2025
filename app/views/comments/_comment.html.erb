@@ -5,7 +5,7 @@
   </div>
   <p><%= comment.content %></p>
   <div class="comment-footer">
-    <% if comment.user == current_user %>
+    <% if comment.own?(current_user) %>
       <div>
         <%= link_to t('views.comments.edit'), edit_report_comment_path(commentable, comment) %>
       </div>

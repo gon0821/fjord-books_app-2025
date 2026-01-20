@@ -52,6 +52,6 @@ class ReportsController < ApplicationController
   end
 
   def redirect_unless_owner
-    redirect_to reports_path, alert: t('controllers.common.alert_permission', name: Report.model_name.human) unless @report.user == current_user
+    redirect_to reports_path, alert: t('controllers.common.alert_permission', name: Report.model_name.human) unless @report.own?(current_user)
   end
 end

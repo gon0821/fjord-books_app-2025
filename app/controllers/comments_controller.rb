@@ -48,6 +48,6 @@ class CommentsController < ApplicationController
   end
 
   def redirect_unless_owner
-    redirect_to @comment.commentable, alert: t('controllers.common.alert_permission', name: Comment.model_name.human) unless @comment.user == current_user
+    redirect_to @comment.commentable, alert: t('controllers.common.alert_permission', name: Comment.model_name.human) unless @comment.own?(current_user)
   end
 end
