@@ -14,13 +14,14 @@ class CommentsController < ApplicationController
     else
       case @comment.commentable_type
       when 'Report'
-        @report = Report.find(comment_params[:commentable_id])
+        @report = Report.find(params[:report_id])
         @comments = @report.comments
+        render 'reports/show', status: :unprocessable_entity
       when 'Book'
-        @book = Book.find(comment_params[:commentable_id])
+        @book = Book.find(params[:book_id])
         @comments = @book.comments
+        render 'books/show', status: :unprocessable_entity
       end
-      render "#{comment_params[:commentable_type].downcase.pluralize}/show", status: :unprocessable_entity
     end
   end
 
@@ -44,7 +45,11 @@ class CommentsController < ApplicationController
   end
 
   def comment_params
-    params.expect(comment: %i[content commentable_id commentable_type]).merge(user_id: current_user.id)
+    params.expect(comment: [:content]).merge(
+        user_id: current_user.id,
+        commentable_id: params[:report_id] || params[:book_id],
+        commentable_type: params[:report_id] ? 'Report' : 'Book'
+      )
   end
 
   def redirect_unless_owner
