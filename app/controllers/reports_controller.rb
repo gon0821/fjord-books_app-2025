@@ -10,7 +10,7 @@ class ReportsController < ApplicationController
 
   def show
     @comment = current_user.comments.new
-    @comments = @report.comments
+    @comments = @report.comments.order(:created_at)
   end
 
   def new
