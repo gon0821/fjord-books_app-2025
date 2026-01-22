@@ -6,25 +6,6 @@ class CommentsController < ApplicationController
 
   def edit; end
 
-  def create
-    @comment = Comment.new(comment_params)
-
-    if @comment.save
-      redirect_to @comment.commentable, notice: t('controllers.common.notice_create', name: Comment.model_name.human)
-    else
-      case @comment.commentable_type
-      when 'Report'
-        @report = Report.find(params[:report_id])
-        @comments = @report.comments
-        render 'reports/show', status: :unprocessable_entity
-      when 'Book'
-        @book = Book.find(params[:book_id])
-        @comments = @book.comments
-        render 'books/show', status: :unprocessable_entity
-      end
-    end
-  end
-
   def update
     if @comment.update(comment_params)
       redirect_to @comment.commentable, status: :see_other, notice: t('controllers.common.notice_update', name: Comment.model_name.human)
