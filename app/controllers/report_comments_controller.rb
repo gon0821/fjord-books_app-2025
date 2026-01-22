@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportCommentsController < CommentsController
   def create
     @comment = Comment.new(comment_params)
