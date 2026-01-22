@@ -25,14 +25,6 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params.expect(:id))
   end
 
-  def comment_params
-    params.expect(comment: [:content]).merge(
-        user_id: current_user.id,
-        commentable_id: params[:report_id] || params[:book_id],
-        commentable_type: params[:report_id] ? 'Report' : 'Book'
-      )
-  end
-
   def redirect_unless_owner
     redirect_to @comment.commentable, alert: t('controllers.common.alert_permission', name: Comment.model_name.human) unless @comment.own?(current_user)
   end

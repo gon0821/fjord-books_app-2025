@@ -10,4 +10,14 @@ class ReportCommentsController < CommentsController
       render 'reports/show', status: :unprocessable_entity
     end
   end
+
+  private
+
+  def comment_params
+    params.expect(comment: [:content]).merge(
+      user_id: current_user.id,
+      commentable_id: params[:report_id],
+      commentable_type: 'Report'
+    )
+  end
 end
