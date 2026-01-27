@@ -100,8 +100,8 @@ Common
   --global-label-fz: .9em;
   --global-lh: 1.8;
   /* primary */
-  --global-primary-c: #0088cc;
-  --global-primary-c-hover: #005580;
+  --global-primary-c: #0078b5;
+  --global-primary-c-hover: #012d42;
   /* secondary */
   --global-secondary-bgc: rgb(233, 233, 233);
   --global-secondary-bgc-hover: rgb(212, 212, 212);

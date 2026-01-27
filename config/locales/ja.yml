@@ -178,7 +178,7 @@ ja:
   time:
     am: 午前
     formats:
-      default: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
+      default: "%Y年%m月%d日(%a) %H:%M"
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
@@ -203,11 +203,20 @@ ja:
       previous: '‹ 前'
       next: '次 ›'
       truncate: '…'
+    reports:
+      date: "%{date}の日報"
+    comments:
+      create: コメントする
+      edit: 編集する
+      destroy: 削除する
+      empty_message: コメントはまだありません
+      empty_description: コメントを追加して会話を始めましょう
   controllers:
     common:
       notice_create: "%{name}が作成されました。"
       notice_update: "%{name}が更新されました。"
       notice_destroy: "%{name}が削除されました。"
+      alert_permission: "本人以外の%{name}でこの操作は許可されていません"
   layouts:
     application:
       menu: メニュー

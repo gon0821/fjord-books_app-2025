@@ -1,0 +1,17 @@
+<div class="comment-item">
+  <div class="comment-header">
+    <div><%= current_user_name(comment.user) %></div>
+    <div><%= l comment.created_at %></div>
+  </div>
+  <p><%= comment.content %></p>
+  <div class="comment-footer">
+    <% if comment.own?(current_user) %>
+      <div>
+        <%= link_to t('views.comments.edit'), edit_report_comment_path(commentable, comment) %>
+      </div>
+      <div>
+        <%= button_to t('views.comments.destroy'), report_comment_path(commentable, comment), method: :delete %>
+      </div>
+    <% end %>
+  </div>
+</div>

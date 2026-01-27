@@ -1,12 +1,34 @@
-<h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
+<div class="container">
+  <div class="main-content">
+    <h1><%= t('views.common.title_show', name: Book.model_name.human) %></h1>
 
-<div class="show-item">
-  <%= render @book %>
+    <div class="show-item">
+      <%= render @book %>
+    </div>
+
+    <nav class="page-nav">
+      <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
+      <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
+
+      <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
+    </nav>
+  </div>
+
+  <div class="sidebar">
+    <h2><%= Comment.model_name.human %></h2>
+
+    <div>
+      <% if @comments.blank? %>
+        <%= image_tag 'no-comment.png', class: 'comment-image', alt: 'Discussion Image' %>
+        <p class='comment-message'>
+          <b><%= t('views.comments.empty_message') %></b><br>
+          <%= t('views.comments.empty_description') %>
+        </p>
+      <% else %>
+        <%= render @comments, commentable: @book %>
+      <% end %>
+    </div>
+
+    <%= render 'comments/form', commentable: @book, comment: @comment %>
+  </div>
 </div>
-
-<nav class="page-nav">
-  <%= link_to t('views.common.edit', name: Book.model_name.human.downcase), edit_book_path(@book) %> |
-  <%= link_to t('views.common.back', name: i18n_pluralize(Book.model_name.human.downcase)), books_path %>
-
-  <%= button_to t('views.common.destroy', name: Book.model_name.human.downcase), @book, method: :delete %>
-</nav>

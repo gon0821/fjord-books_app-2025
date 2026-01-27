@@ -1,0 +1,33 @@
+.card-list-items {
+  margin-top: 1rem;
+  width: 50%;
+}
+
+.card-list-item {
+  padding: 1.5rem 1rem;
+  border: 1px solid #015077;
+}
+
+.card-list-item:not(:first-child) {
+  margin-top: 0.75rem;
+}
+
+.card-list-item-title {
+  font-size: 1.25rem;
+  margin: 0.5rem;
+}
+
+.card-list-item-title a {
+  text-decoration: none;
+}
+
+.card-list-item-meta {
+  margin-top: 1rem;
+  display: flex;
+  gap: 2rem;
+  padding-left: 1rem;
+}
+
+.card-list-item-meta a {
+  text-decoration: none;
+}
