@@ -21,6 +21,12 @@ class ReportsController < ApplicationController
     @report = current_user.reports.new(report_params)
 
     if @report.save
+      report_links = @report.content.scan(/http:\/\/localhost:3000\/reports\/\d+/)
+      if report_links
+        report_links.each do |link|
+          ReportMention.create(mentioning_report_id: @report.id, mentioned_report_id: link[/\d+\z/].to_i)
+        end
+      end
       redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
     else
       render :new, status: :unprocessable_entity
