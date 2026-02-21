@@ -56,16 +56,16 @@ class ReportsController < ApplicationController
   end
 
   def add_report_mentions(report)
-    report_links = report.content.scan(/http:\/\/localhost:3000\/reports\/\d+/)
-    if report_links
-      report_links.each do |link|
-        ReportMention.find_or_create_by(mentioning_report_id: report.id, mentioned_report_id: link[/\d+\z/].to_i)
-      end
+    report_links = report.content.scan(%r{http://localhost:3000/reports/\d+})
+    return if report_links.blank?
+
+    report_links.each do |link|
+      ReportMention.find_or_create_by(mentioning_report_id: report.id, mentioned_report_id: link[/\d+\z/].to_i)
     end
   end
 
   def delete_report_mentions(report)
-    report_links = report.content.scan(/http:\/\/localhost:3000\/reports\/\d+/)
+    report_links = report.content.scan(%r{http://localhost:3000/reports/\d+})
     reports = []
     report_links.each do |link|
       reports << Report.find(link[/\d+\z/].to_i)
