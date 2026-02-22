@@ -25,8 +25,8 @@ class ReportsController < ApplicationController
       @report.save!
       add_report_mentions(@report)
     end
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-  rescue ActiveRecord::RecordInvalid => e
+    redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+  rescue ActiveRecord::RecordInvalid
     render :new, status: :unprocessable_entity
   end
 
@@ -36,8 +36,8 @@ class ReportsController < ApplicationController
       add_report_mentions(@report)
       delete_report_mentions(@report)
     end
-      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-  rescue ActiveRecord::RecordInvalid => e
+    redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+  rescue ActiveRecord::RecordInvalid
     render :edit, status: :unprocessable_entity
   end
 
