@@ -21,22 +21,24 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    if @report.save
+    ActiveRecord::Base.transaction do
+      @report.save!
       add_report_mentions(@report)
-      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-    else
-      render :new, status: :unprocessable_entity
     end
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+  rescue ActiveRecord::RecordInvalid => e
+    render :new, status: :unprocessable_entity
   end
 
   def update
-    if @report.update(report_params)
+    ActiveRecord::Base.transaction do
+      @report.update!(report_params)
       add_report_mentions(@report)
       delete_report_mentions(@report)
-      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
-    else
-      render :edit, status: :unprocessable_entity
     end
+      redirect_to @report, notice: t('controllers.common.notice_update', name: Report.model_name.human)
+  rescue ActiveRecord::RecordInvalid => e
+    render :edit, status: :unprocessable_entity
   end
 
   def destroy
@@ -60,7 +62,7 @@ class ReportsController < ApplicationController
     return if report_links.blank?
 
     report_links.each do |link|
-      ReportMention.find_or_create_by(mentioning_report_id: report.id, mentioned_report_id: link[/\d+\z/].to_i)
+      ReportMention.find_or_create_by!(mentioning_report_id: report.id, mentioned_report_id: link[/\d+\z/].to_i)
     end
   end
 
@@ -72,7 +74,7 @@ class ReportsController < ApplicationController
     end
     diff_reports = report.mentioning_reports - reports
     diff_reports.each do |diff_report|
-      report.active_mentions.find_by(mentioned_report_id: diff_report.id).delete
+      report.active_mentions.find_by(mentioned_report_id: diff_report.id).destroy!
     end
   end
 end
