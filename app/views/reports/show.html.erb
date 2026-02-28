@@ -17,10 +17,10 @@
   <% end %>
 </nav>
 
-<% if @mentioned_reports.present? %>
+<% if @report.mentioned_reports.present? %>
   <h2>この日報に言及している日報</h2>
   <ul>
-    <% @mentioned_reports.each do |report| %>
+    <% @report.mentioned_reports.each do |report| %>
       <li>
         <%= link_to report.title, report_path(report) %>
       </li>
