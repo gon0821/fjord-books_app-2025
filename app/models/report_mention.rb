@@ -3,4 +3,10 @@
 class ReportMention < ApplicationRecord
   belongs_to :mentioning_report, class_name: 'Report'
   belongs_to :mentioned_report, class_name: 'Report'
+
+  def self.add_mentions(report, mentioned_link_ids)
+    mentioned_link_ids.each do |mentioned_link_id|
+      find_or_create_by!(mentioning_report_id: report.id, mentioned_report_id: mentioned_link_id)
+    end
+  end
 end

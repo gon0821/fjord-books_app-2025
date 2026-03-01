@@ -20,13 +20,11 @@ class ReportsController < ApplicationController
   def create
     @report = current_user.reports.new(report_params)
 
-    ActiveRecord::Base.transaction do
-      @report.save!
-      add_report_mentions(@report)
+    if @report.save_with_mentions
+      redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
+    else
+      render :new, status: :unprocessable_entity
     end
-    redirect_to @report, notice: t('controllers.common.notice_create', name: Report.model_name.human)
-  rescue ActiveRecord::RecordInvalid
-    render :new, status: :unprocessable_entity
   end
 
   def update
@@ -57,12 +55,12 @@ class ReportsController < ApplicationController
   end
 
   def add_report_mentions(report)
-    report_links = report.content.scan(%r{http://localhost:3000/reports/\d+})
-    return if report_links.blank?
+    # return if report.mentioned_link_ids.blank?
+    ReportMention.add_mentions(report, report.mentioned_link_ids)
 
-    report_links.each do |link|
-      ReportMention.find_or_create_by!(mentioning_report_id: report.id, mentioned_report_id: link[/\d+\z/].to_i)
-    end
+    # report.mentioned_link_ids.each do |mentioned_link_id|
+    #   ReportMention.find_or_create_by!(mentioning_report_id: report.id, mentioned_report_id: mentioned_link_id)
+    # end
   end
 
   def delete_report_mentions(report)

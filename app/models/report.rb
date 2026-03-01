@@ -20,4 +20,22 @@ class Report < ApplicationRecord
   def created_on
     created_at.to_date
   end
+
+  def save_with_mentions
+    saved = true
+    ActiveRecord::Base.transaction do
+      if save
+        ReportMention.add_mentions(self, mentioned_link_ids)
+      else
+        saved = false
+        raise ActiveRecord::Rollback
+      end
+    end
+    saved
+  end
+
+  def mentioned_link_ids
+    mentioned_links = content.scan(%r{http://localhost:3000/reports/\d+})
+    mentioned_links.map { |link| link[/\d+\z/].to_i }
+  end
 end
