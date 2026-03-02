@@ -25,13 +25,27 @@ class Report < ApplicationRecord
     saved = true
     ActiveRecord::Base.transaction do
       if save
-        ReportMention.add_mentions(self, mentioned_link_ids)
+        ReportMention.add_linked_mentions(self)
       else
         saved = false
         raise ActiveRecord::Rollback
       end
     end
     saved
+  end
+
+  def update_with_mentions(params)
+    updated = true
+    ActiveRecord::Base.transaction do
+      if update(params)
+        ReportMention.add_linked_mentions(self)
+        ReportMention.remove_unlinked_mentions(self)
+      else
+        updated = false
+        raise ActiveRecord::Rollback
+      end
+    end
+    updated
   end
 
   def mentioned_link_ids
