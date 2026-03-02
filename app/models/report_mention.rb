@@ -11,9 +11,9 @@ class ReportMention < ApplicationRecord
   end
 
   def self.remove_unlinked_mentions(report)
-    diff_report_ids = report.mentioning_reports.map(&:id) - report.mentioned_link_ids
-    diff_report_ids.each do |diff_report_id|
-      report.active_mentions.find_by(mentioned_report_id: diff_report_id).destroy!
+    unlinked_report_ids = report.mentioning_reports.map(&:id) - report.mentioned_link_ids
+    unlinked_report_ids.each do |unlinked_report_id|
+      report.active_mentions.find_by(mentioned_report_id: unlinked_report_id).destroy!
     end
   end
 end
