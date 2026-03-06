@@ -25,7 +25,7 @@ class Report < ApplicationRecord
     saved = false
     ActiveRecord::Base.transaction do
       if save
-        ReportMention.add_linked_mentions(self)
+        add_linked_mentions
         saved = true
       else
         raise ActiveRecord::Rollback
@@ -38,8 +38,7 @@ class Report < ApplicationRecord
     updated = false
     ActiveRecord::Base.transaction do
       if update(params)
-        ReportMention.add_linked_mentions(self)
-        ReportMention.remove_unlinked_mentions(self)
+        add_linked_mentions
         updated = true
       else
         raise ActiveRecord::Rollback
@@ -52,5 +51,12 @@ class Report < ApplicationRecord
       content
         .scan(%r{http://localhost:3000/reports/\d+})
         .map { |link| link[/\d+\z/].to_i }
+  end
+
+  def add_linked_mentions
+    active_mentions.destroy_all
+    mentioned_link_ids.each do |mentioned_link_id|
+      active_mentions.create!(mentioned_report_id: mentioned_link_id)
+    end
   end
 end
