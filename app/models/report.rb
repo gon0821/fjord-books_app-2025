@@ -48,9 +48,9 @@ class Report < ApplicationRecord
   end
 
   def mentioned_link_ids
-      content
-        .scan(%r{http://localhost:3000/reports/\d+})
-        .map { |link| link[/\d+\z/].to_i }
+    content
+      .scan(%r{http://localhost:3000/reports/\d+})
+      .map { |link| link[/\d+\z/].to_i }
   end
 
   def add_linked_mentions
