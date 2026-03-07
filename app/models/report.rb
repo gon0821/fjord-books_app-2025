@@ -51,6 +51,7 @@ class Report < ApplicationRecord
     content
       .scan(%r{http://localhost:3000/reports/\d+})
       .map { |link| link[/\d+\z/].to_i }
+      .select { |link_id| id != link_id && Report.find_by(id: link_id) }
   end
 
   def add_linked_mentions
