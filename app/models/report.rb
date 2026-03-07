@@ -51,7 +51,7 @@ class Report < ApplicationRecord
   end
 
   def add_linked_mentions
-    active_mentions.destroy_all
+    active_mentions.each(&:destroy!)
     mentioned_link_ids.each do |mentioned_link_id|
       active_mentions.create!(mentioned_report_id: mentioned_link_id)
     end
