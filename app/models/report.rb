@@ -45,8 +45,8 @@ class Report < ApplicationRecord
 
   def mentioned_link_ids
     content
-      .scan(%r{http://localhost:3000/reports/\d+})
-      .map { |link| link[/\d+\z/].to_i }
+      .scan(%r{http://localhost:3000/reports/(\d+)})
+      .flatten
       .select { |link_id| id != link_id && Report.find_by(id: link_id) }
   end
 
