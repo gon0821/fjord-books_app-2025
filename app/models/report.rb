@@ -24,10 +24,10 @@ class Report < ApplicationRecord
   def save_with_mentions
     saved = false
     ActiveRecord::Base.transaction do
-      raise ActiveRecord::Rollback unless save
-
-      add_linked_mentions
-      saved = true
+      if save
+        add_linked_mentions
+        saved = true
+      end
     end
     saved
   end
@@ -35,10 +35,10 @@ class Report < ApplicationRecord
   def update_with_mentions(params)
     updated = false
     ActiveRecord::Base.transaction do
-      raise ActiveRecord::Rollback unless update(params)
-
-      add_linked_mentions
-      updated = true
+      if update(params)
+        add_linked_mentions
+        updated = true
+      end
     end
     updated
   end
