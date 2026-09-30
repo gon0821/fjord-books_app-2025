@@ -4,11 +4,11 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    user = create(:user, email: 'test@example.com', password: 'Password!', password_confirmation: 'Password!')
+    user = create(:user)
     @report = create(:report, user: user)
     visit root_path
-    fill_in 'Eメール', with: 'test@example.com'
-    fill_in 'パスワード', with: 'Password!'
+    fill_in 'Eメール', with: user.email
+    fill_in 'パスワード', with: user.password
     click_on 'ログイン'
     assert_text 'ログインしました'
   end
