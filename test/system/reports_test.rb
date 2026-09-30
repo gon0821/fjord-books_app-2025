@@ -4,9 +4,11 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    @report = reports(:naoki_report_one)
+    user = create(:user)
+    user = create(:user, email: 'test@example.com', password: 'Password!', password_confirmation: 'Password!')
+    @report = create(:report, user: user)
     visit root_path
-    fill_in 'Eメール', with: 'naoki@example.com'
+    fill_in 'Eメール', with: 'test@example.com'
     fill_in 'パスワード', with: 'Password!'
     click_on 'ログイン'
     assert_text 'ログインしました'

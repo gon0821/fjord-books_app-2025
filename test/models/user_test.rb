@@ -4,9 +4,9 @@ require 'test_helper'
 
 class UserTest < ActiveSupport::TestCase
   test '#name_or_email' do
-    naoki = users(:naoki)
-    eren = users(:eren)
-    assert_equal 'naoki', naoki.name_or_email
-    assert_equal 'eren@example.com', eren.name_or_email
+    user1 = build(:user)
+    user2 = build(:user, name: nil, email: 'user_2@example.com')
+    assert_equal 'テストユーザー', user1.name_or_email
+    assert_equal 'user_2@example.com', user2.name_or_email
   end
 end
