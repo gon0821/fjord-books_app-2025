@@ -30,7 +30,7 @@ class BooksTest < ApplicationSystemTestCase
     fill_in 'タイトル', with: 'ジャバスクリプト本'
     fill_in 'メモ', with: 'JavaScript初心者向けの本'
     fill_in '著者', with: '高橋 一郎'
-    attach_file '画像', "#{Rails.root}/test/fixtures/files/javascript_book.jpeg"
+    attach_file '画像', Rails.root.join('test/fixtures/files/javascript_book.jpeg')
     click_on '登録する'
     assert_text '本が作成されました。'
   end
@@ -42,7 +42,7 @@ class BooksTest < ApplicationSystemTestCase
     fill_in 'タイトル', with: 'Reactの教科書'
     fill_in 'メモ', with: 'React初心者向けの本'
     fill_in '著者', with: '鈴木 翔平'
-    attach_file '画像', "#{Rails.root}/test/fixtures/files/react_book.jpg"
+    attach_file '画像', Rails.root.join('test/fixtures/files/react_book.jpg')
     click_on '更新する'
     assert_text '本が更新されました。'
   end
