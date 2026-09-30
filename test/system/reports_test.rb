@@ -4,7 +4,6 @@ require 'application_system_test_case'
 
 class ReportsTest < ApplicationSystemTestCase
   setup do
-    user = create(:user)
     user = create(:user, email: 'test@example.com', password: 'Password!', password_confirmation: 'Password!')
     @report = create(:report, user: user)
     visit root_path
