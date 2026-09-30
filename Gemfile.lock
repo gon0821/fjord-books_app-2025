@@ -141,6 +141,11 @@ GEM
     erubi (1.13.1)
     et-orbi (1.2.11)
       tzinfo
+    factory_bot (6.6.0)
+      activesupport (>= 6.1.0)
+    factory_bot_rails (6.5.1)
+      factory_bot (~> 6.5)
+      railties (>= 6.1.0)
     faker (3.5.2)
       i18n (>= 1.8.11, < 2)
     ffi (1.17.1)
@@ -435,6 +440,7 @@ DEPENDENCIES
   devise
   devise-i18n
   erb_lint
+  factory_bot_rails
   faker
   i18n_generators
   image_processing (~> 1.2)

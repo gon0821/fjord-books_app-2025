@@ -53,6 +53,7 @@ group :development, :test do
   gem 'rubocop-rails-omakase', require: false
 
   gem 'rubocop-fjord', require: false
+  gem 'factory_bot_rails'
 end
 
 group :development do
