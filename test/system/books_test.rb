@@ -33,6 +33,10 @@ class BooksTest < ApplicationSystemTestCase
     attach_file '画像', Rails.root.join('test/fixtures/files/javascript_book.jpeg')
     click_on '登録する'
     assert_text '本が作成されました。'
+    assert_text 'ジャバスクリプト本'
+    assert_text 'JavaScript初心者向けの本'
+    assert_text '高橋 一郎'
+    assert_selector "img[src*='javascript_book.jpeg']"
   end
 
   test 'should update book' do
@@ -45,11 +49,19 @@ class BooksTest < ApplicationSystemTestCase
     attach_file '画像', Rails.root.join('test/fixtures/files/react_book.jpg')
     click_on '更新する'
     assert_text '本が更新されました。'
+    assert_text 'Reactの教科書'
+    assert_text 'React初心者向けの本'
+    assert_text '鈴木 翔平'
+    assert_selector "img[src*='react_book.jpg']"
   end
 
   test 'should delete book' do
     visit book_path(@book)
     click_on 'この本を削除'
     assert_text '本が削除されました'
+    assert_no_text 'テスト本'
+    assert_no_text 'テスト初心者向けの内容です'
+    assert_no_text '山田 太郎'
+    assert_no_selector "img[src*='ruby_book.jpg']"
   end
 end

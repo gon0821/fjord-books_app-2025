@@ -31,6 +31,8 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in '内容', with: 'fixturesの代わりにFactoryBotを使ってテストデータを作りました'
     click_on '登録する'
     assert_text '日報が作成されました。'
+    assert_text 'FactoryBotへ置き換え'
+    assert_text 'fixturesの代わりにFactoryBotを使ってテストデータを作りました'
   end
 
   test 'should update report' do
@@ -40,11 +42,14 @@ class ReportsTest < ApplicationSystemTestCase
     fill_in 'タイトル', with: 'オブジェクト指向へ着手'
     click_on '更新する'
     assert_text '日報が更新されました。'
+    assert_text 'オブジェクト指向へ着手'
   end
 
   test 'should delete report' do
     visit report_path(@report)
     click_on 'この日報を削除'
     assert_text '日報が削除されました。'
+    assert_no_text 'テスト日報'
+    assert_no_text 'テスト日報の内容になります'
   end
 end
